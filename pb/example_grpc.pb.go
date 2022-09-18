@@ -18,258 +18,88 @@ import (
 // Requires gRPC-Go v1.32.0 or later.
 const _ = grpc.SupportPackageIsVersion7
 
-// GweetServiceClient is the client API for GweetService service.
+// GreeterClient is the client API for Greeter service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type GweetServiceClient interface {
-	PostGwitter(ctx context.Context, in *PostGwitterRequest, opts ...grpc.CallOption) (*PostGwitterResponse, error)
-	ReadGwitter(ctx context.Context, in *ReadGwitterRequest, opts ...grpc.CallOption) (*ReadGwitterResponse, error)
-	UpdateGwitter(ctx context.Context, in *UpdateGwitterRequest, opts ...grpc.CallOption) (*UpdateGwitterResponse, error)
-	DeleteGwitter(ctx context.Context, in *DeleteGwitterRequest, opts ...grpc.CallOption) (*DeleteGwitterResponse, error)
-	ListGwitter(ctx context.Context, in *ListGwitterRequest, opts ...grpc.CallOption) (GweetService_ListGwitterClient, error)
+type GreeterClient interface {
+	// Sends a greeting
+	SayHello(ctx context.Context, in *HelloRequest, opts ...grpc.CallOption) (*HelloReply, error)
 }
 
-type gweetServiceClient struct {
+type greeterClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewGweetServiceClient(cc grpc.ClientConnInterface) GweetServiceClient {
-	return &gweetServiceClient{cc}
+func NewGreeterClient(cc grpc.ClientConnInterface) GreeterClient {
+	return &greeterClient{cc}
 }
 
-func (c *gweetServiceClient) PostGwitter(ctx context.Context, in *PostGwitterRequest, opts ...grpc.CallOption) (*PostGwitterResponse, error) {
-	out := new(PostGwitterResponse)
-	err := c.cc.Invoke(ctx, "/gwitter.GweetService/PostGwitter", in, out, opts...)
+func (c *greeterClient) SayHello(ctx context.Context, in *HelloRequest, opts ...grpc.CallOption) (*HelloReply, error) {
+	out := new(HelloReply)
+	err := c.cc.Invoke(ctx, "/gwitter.Greeter/SayHello", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *gweetServiceClient) ReadGwitter(ctx context.Context, in *ReadGwitterRequest, opts ...grpc.CallOption) (*ReadGwitterResponse, error) {
-	out := new(ReadGwitterResponse)
-	err := c.cc.Invoke(ctx, "/gwitter.GweetService/ReadGwitter", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *gweetServiceClient) UpdateGwitter(ctx context.Context, in *UpdateGwitterRequest, opts ...grpc.CallOption) (*UpdateGwitterResponse, error) {
-	out := new(UpdateGwitterResponse)
-	err := c.cc.Invoke(ctx, "/gwitter.GweetService/UpdateGwitter", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *gweetServiceClient) DeleteGwitter(ctx context.Context, in *DeleteGwitterRequest, opts ...grpc.CallOption) (*DeleteGwitterResponse, error) {
-	out := new(DeleteGwitterResponse)
-	err := c.cc.Invoke(ctx, "/gwitter.GweetService/DeleteGwitter", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *gweetServiceClient) ListGwitter(ctx context.Context, in *ListGwitterRequest, opts ...grpc.CallOption) (GweetService_ListGwitterClient, error) {
-	stream, err := c.cc.NewStream(ctx, &GweetService_ServiceDesc.Streams[0], "/gwitter.GweetService/ListGwitter", opts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &gweetServiceListGwitterClient{stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-type GweetService_ListGwitterClient interface {
-	Recv() (*ListGwitterResponse, error)
-	grpc.ClientStream
-}
-
-type gweetServiceListGwitterClient struct {
-	grpc.ClientStream
-}
-
-func (x *gweetServiceListGwitterClient) Recv() (*ListGwitterResponse, error) {
-	m := new(ListGwitterResponse)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
-// GweetServiceServer is the server API for GweetService service.
-// All implementations should embed UnimplementedGweetServiceServer
+// GreeterServer is the server API for Greeter service.
+// All implementations should embed UnimplementedGreeterServer
 // for forward compatibility
-type GweetServiceServer interface {
-	PostGwitter(context.Context, *PostGwitterRequest) (*PostGwitterResponse, error)
-	ReadGwitter(context.Context, *ReadGwitterRequest) (*ReadGwitterResponse, error)
-	UpdateGwitter(context.Context, *UpdateGwitterRequest) (*UpdateGwitterResponse, error)
-	DeleteGwitter(context.Context, *DeleteGwitterRequest) (*DeleteGwitterResponse, error)
-	ListGwitter(*ListGwitterRequest, GweetService_ListGwitterServer) error
+type GreeterServer interface {
+	// Sends a greeting
+	SayHello(context.Context, *HelloRequest) (*HelloReply, error)
 }
 
-// UnimplementedGweetServiceServer should be embedded to have forward compatible implementations.
-type UnimplementedGweetServiceServer struct {
+// UnimplementedGreeterServer should be embedded to have forward compatible implementations.
+type UnimplementedGreeterServer struct {
 }
 
-func (UnimplementedGweetServiceServer) PostGwitter(context.Context, *PostGwitterRequest) (*PostGwitterResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PostGwitter not implemented")
-}
-func (UnimplementedGweetServiceServer) ReadGwitter(context.Context, *ReadGwitterRequest) (*ReadGwitterResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ReadGwitter not implemented")
-}
-func (UnimplementedGweetServiceServer) UpdateGwitter(context.Context, *UpdateGwitterRequest) (*UpdateGwitterResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateGwitter not implemented")
-}
-func (UnimplementedGweetServiceServer) DeleteGwitter(context.Context, *DeleteGwitterRequest) (*DeleteGwitterResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteGwitter not implemented")
-}
-func (UnimplementedGweetServiceServer) ListGwitter(*ListGwitterRequest, GweetService_ListGwitterServer) error {
-	return status.Errorf(codes.Unimplemented, "method ListGwitter not implemented")
+func (UnimplementedGreeterServer) SayHello(context.Context, *HelloRequest) (*HelloReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SayHello not implemented")
 }
 
-// UnsafeGweetServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to GweetServiceServer will
+// UnsafeGreeterServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to GreeterServer will
 // result in compilation errors.
-type UnsafeGweetServiceServer interface {
-	mustEmbedUnimplementedGweetServiceServer()
+type UnsafeGreeterServer interface {
+	mustEmbedUnimplementedGreeterServer()
 }
 
-func RegisterGweetServiceServer(s grpc.ServiceRegistrar, srv GweetServiceServer) {
-	s.RegisterService(&GweetService_ServiceDesc, srv)
+func RegisterGreeterServer(s grpc.ServiceRegistrar, srv GreeterServer) {
+	s.RegisterService(&Greeter_ServiceDesc, srv)
 }
 
-func _GweetService_PostGwitter_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PostGwitterRequest)
+func _Greeter_SayHello_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(HelloRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(GweetServiceServer).PostGwitter(ctx, in)
+		return srv.(GreeterServer).SayHello(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/gwitter.GweetService/PostGwitter",
+		FullMethod: "/gwitter.Greeter/SayHello",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GweetServiceServer).PostGwitter(ctx, req.(*PostGwitterRequest))
+		return srv.(GreeterServer).SayHello(ctx, req.(*HelloRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _GweetService_ReadGwitter_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ReadGwitterRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(GweetServiceServer).ReadGwitter(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/gwitter.GweetService/ReadGwitter",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GweetServiceServer).ReadGwitter(ctx, req.(*ReadGwitterRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _GweetService_UpdateGwitter_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateGwitterRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(GweetServiceServer).UpdateGwitter(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/gwitter.GweetService/UpdateGwitter",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GweetServiceServer).UpdateGwitter(ctx, req.(*UpdateGwitterRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _GweetService_DeleteGwitter_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteGwitterRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(GweetServiceServer).DeleteGwitter(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/gwitter.GweetService/DeleteGwitter",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GweetServiceServer).DeleteGwitter(ctx, req.(*DeleteGwitterRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _GweetService_ListGwitter_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(ListGwitterRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(GweetServiceServer).ListGwitter(m, &gweetServiceListGwitterServer{stream})
-}
-
-type GweetService_ListGwitterServer interface {
-	Send(*ListGwitterResponse) error
-	grpc.ServerStream
-}
-
-type gweetServiceListGwitterServer struct {
-	grpc.ServerStream
-}
-
-func (x *gweetServiceListGwitterServer) Send(m *ListGwitterResponse) error {
-	return x.ServerStream.SendMsg(m)
-}
-
-// GweetService_ServiceDesc is the grpc.ServiceDesc for GweetService service.
+// Greeter_ServiceDesc is the grpc.ServiceDesc for Greeter service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var GweetService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "gwitter.GweetService",
-	HandlerType: (*GweetServiceServer)(nil),
+var Greeter_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "gwitter.Greeter",
+	HandlerType: (*GreeterServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "PostGwitter",
-			Handler:    _GweetService_PostGwitter_Handler,
-		},
-		{
-			MethodName: "ReadGwitter",
-			Handler:    _GweetService_ReadGwitter_Handler,
-		},
-		{
-			MethodName: "UpdateGwitter",
-			Handler:    _GweetService_UpdateGwitter_Handler,
-		},
-		{
-			MethodName: "DeleteGwitter",
-			Handler:    _GweetService_DeleteGwitter_Handler,
+			MethodName: "SayHello",
+			Handler:    _Greeter_SayHello_Handler,
 		},
 	},
-	Streams: []grpc.StreamDesc{
-		{
-			StreamName:    "ListGwitter",
-			Handler:       _GweetService_ListGwitter_Handler,
-			ServerStreams: true,
-		},
-	},
+	Streams:  []grpc.StreamDesc{},
 	Metadata: "protoc/example.proto",
 }

@@ -20,19 +20,17 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-//Gweetの型を決めます。各フィールドは型と名称を持ちます。
-type Gweet struct {
+// The request message containing the user's name.
+type HelloRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id      string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	UserId  string `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Content string `protobuf:"bytes,3,opt,name=content,proto3" json:"content,omitempty"`
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 }
 
-func (x *Gweet) Reset() {
-	*x = Gweet{}
+func (x *HelloRequest) Reset() {
+	*x = HelloRequest{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_protoc_example_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -40,13 +38,13 @@ func (x *Gweet) Reset() {
 	}
 }
 
-func (x *Gweet) String() string {
+func (x *HelloRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Gweet) ProtoMessage() {}
+func (*HelloRequest) ProtoMessage() {}
 
-func (x *Gweet) ProtoReflect() protoreflect.Message {
+func (x *HelloRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_protoc_example_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -58,42 +56,29 @@ func (x *Gweet) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use Gweet.ProtoReflect.Descriptor instead.
-func (*Gweet) Descriptor() ([]byte, []int) {
+// Deprecated: Use HelloRequest.ProtoReflect.Descriptor instead.
+func (*HelloRequest) Descriptor() ([]byte, []int) {
 	return file_protoc_example_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *Gweet) GetId() string {
+func (x *HelloRequest) GetName() string {
 	if x != nil {
-		return x.Id
+		return x.Name
 	}
 	return ""
 }
 
-func (x *Gweet) GetUserId() string {
-	if x != nil {
-		return x.UserId
-	}
-	return ""
-}
-
-func (x *Gweet) GetContent() string {
-	if x != nil {
-		return x.Content
-	}
-	return ""
-}
-
-type PostGwitterRequest struct {
+// The response message containing the greetings
+type HelloReply struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Gweet *Gweet `protobuf:"bytes,1,opt,name=gweet,proto3" json:"gweet,omitempty"`
+	Message string `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`
 }
 
-func (x *PostGwitterRequest) Reset() {
-	*x = PostGwitterRequest{}
+func (x *HelloReply) Reset() {
+	*x = HelloReply{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_protoc_example_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -101,13 +86,13 @@ func (x *PostGwitterRequest) Reset() {
 	}
 }
 
-func (x *PostGwitterRequest) String() string {
+func (x *HelloReply) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*PostGwitterRequest) ProtoMessage() {}
+func (*HelloReply) ProtoMessage() {}
 
-func (x *PostGwitterRequest) ProtoReflect() protoreflect.Message {
+func (x *HelloReply) ProtoReflect() protoreflect.Message {
 	mi := &file_protoc_example_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -119,431 +104,16 @@ func (x *PostGwitterRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PostGwitterRequest.ProtoReflect.Descriptor instead.
-func (*PostGwitterRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use HelloReply.ProtoReflect.Descriptor instead.
+func (*HelloReply) Descriptor() ([]byte, []int) {
 	return file_protoc_example_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *PostGwitterRequest) GetGweet() *Gweet {
+func (x *HelloReply) GetMessage() string {
 	if x != nil {
-		return x.Gweet
-	}
-	return nil
-}
-
-type PostGwitterResponse struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Gweet *Gweet `protobuf:"bytes,1,opt,name=gweet,proto3" json:"gweet,omitempty"`
-}
-
-func (x *PostGwitterResponse) Reset() {
-	*x = PostGwitterResponse{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_protoc_example_proto_msgTypes[2]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *PostGwitterResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*PostGwitterResponse) ProtoMessage() {}
-
-func (x *PostGwitterResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_protoc_example_proto_msgTypes[2]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use PostGwitterResponse.ProtoReflect.Descriptor instead.
-func (*PostGwitterResponse) Descriptor() ([]byte, []int) {
-	return file_protoc_example_proto_rawDescGZIP(), []int{2}
-}
-
-func (x *PostGwitterResponse) GetGweet() *Gweet {
-	if x != nil {
-		return x.Gweet
-	}
-	return nil
-}
-
-type ReadGwitterRequest struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	GweetId string `protobuf:"bytes,1,opt,name=gweet_id,json=gweetId,proto3" json:"gweet_id,omitempty"`
-}
-
-func (x *ReadGwitterRequest) Reset() {
-	*x = ReadGwitterRequest{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_protoc_example_proto_msgTypes[3]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *ReadGwitterRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ReadGwitterRequest) ProtoMessage() {}
-
-func (x *ReadGwitterRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_protoc_example_proto_msgTypes[3]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ReadGwitterRequest.ProtoReflect.Descriptor instead.
-func (*ReadGwitterRequest) Descriptor() ([]byte, []int) {
-	return file_protoc_example_proto_rawDescGZIP(), []int{3}
-}
-
-func (x *ReadGwitterRequest) GetGweetId() string {
-	if x != nil {
-		return x.GweetId
+		return x.Message
 	}
 	return ""
-}
-
-type ReadGwitterResponse struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Gweet *Gweet `protobuf:"bytes,1,opt,name=gweet,proto3" json:"gweet,omitempty"`
-}
-
-func (x *ReadGwitterResponse) Reset() {
-	*x = ReadGwitterResponse{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_protoc_example_proto_msgTypes[4]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *ReadGwitterResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ReadGwitterResponse) ProtoMessage() {}
-
-func (x *ReadGwitterResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_protoc_example_proto_msgTypes[4]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ReadGwitterResponse.ProtoReflect.Descriptor instead.
-func (*ReadGwitterResponse) Descriptor() ([]byte, []int) {
-	return file_protoc_example_proto_rawDescGZIP(), []int{4}
-}
-
-func (x *ReadGwitterResponse) GetGweet() *Gweet {
-	if x != nil {
-		return x.Gweet
-	}
-	return nil
-}
-
-type UpdateGwitterRequest struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Gweet *Gweet `protobuf:"bytes,1,opt,name=gweet,proto3" json:"gweet,omitempty"`
-}
-
-func (x *UpdateGwitterRequest) Reset() {
-	*x = UpdateGwitterRequest{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_protoc_example_proto_msgTypes[5]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *UpdateGwitterRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UpdateGwitterRequest) ProtoMessage() {}
-
-func (x *UpdateGwitterRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_protoc_example_proto_msgTypes[5]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UpdateGwitterRequest.ProtoReflect.Descriptor instead.
-func (*UpdateGwitterRequest) Descriptor() ([]byte, []int) {
-	return file_protoc_example_proto_rawDescGZIP(), []int{5}
-}
-
-func (x *UpdateGwitterRequest) GetGweet() *Gweet {
-	if x != nil {
-		return x.Gweet
-	}
-	return nil
-}
-
-type UpdateGwitterResponse struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Gweet *Gweet `protobuf:"bytes,1,opt,name=gweet,proto3" json:"gweet,omitempty"`
-}
-
-func (x *UpdateGwitterResponse) Reset() {
-	*x = UpdateGwitterResponse{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_protoc_example_proto_msgTypes[6]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *UpdateGwitterResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UpdateGwitterResponse) ProtoMessage() {}
-
-func (x *UpdateGwitterResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_protoc_example_proto_msgTypes[6]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UpdateGwitterResponse.ProtoReflect.Descriptor instead.
-func (*UpdateGwitterResponse) Descriptor() ([]byte, []int) {
-	return file_protoc_example_proto_rawDescGZIP(), []int{6}
-}
-
-func (x *UpdateGwitterResponse) GetGweet() *Gweet {
-	if x != nil {
-		return x.Gweet
-	}
-	return nil
-}
-
-type DeleteGwitterRequest struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	GweetId string `protobuf:"bytes,1,opt,name=gweet_id,json=gweetId,proto3" json:"gweet_id,omitempty"`
-}
-
-func (x *DeleteGwitterRequest) Reset() {
-	*x = DeleteGwitterRequest{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_protoc_example_proto_msgTypes[7]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *DeleteGwitterRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*DeleteGwitterRequest) ProtoMessage() {}
-
-func (x *DeleteGwitterRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_protoc_example_proto_msgTypes[7]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use DeleteGwitterRequest.ProtoReflect.Descriptor instead.
-func (*DeleteGwitterRequest) Descriptor() ([]byte, []int) {
-	return file_protoc_example_proto_rawDescGZIP(), []int{7}
-}
-
-func (x *DeleteGwitterRequest) GetGweetId() string {
-	if x != nil {
-		return x.GweetId
-	}
-	return ""
-}
-
-type DeleteGwitterResponse struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	GweetId string `protobuf:"bytes,1,opt,name=gweet_id,json=gweetId,proto3" json:"gweet_id,omitempty"`
-}
-
-func (x *DeleteGwitterResponse) Reset() {
-	*x = DeleteGwitterResponse{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_protoc_example_proto_msgTypes[8]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *DeleteGwitterResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*DeleteGwitterResponse) ProtoMessage() {}
-
-func (x *DeleteGwitterResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_protoc_example_proto_msgTypes[8]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use DeleteGwitterResponse.ProtoReflect.Descriptor instead.
-func (*DeleteGwitterResponse) Descriptor() ([]byte, []int) {
-	return file_protoc_example_proto_rawDescGZIP(), []int{8}
-}
-
-func (x *DeleteGwitterResponse) GetGweetId() string {
-	if x != nil {
-		return x.GweetId
-	}
-	return ""
-}
-
-//全取得の時は特に何も指定しない
-type ListGwitterRequest struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-}
-
-func (x *ListGwitterRequest) Reset() {
-	*x = ListGwitterRequest{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_protoc_example_proto_msgTypes[9]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *ListGwitterRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ListGwitterRequest) ProtoMessage() {}
-
-func (x *ListGwitterRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_protoc_example_proto_msgTypes[9]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ListGwitterRequest.ProtoReflect.Descriptor instead.
-func (*ListGwitterRequest) Descriptor() ([]byte, []int) {
-	return file_protoc_example_proto_rawDescGZIP(), []int{9}
-}
-
-type ListGwitterResponse struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Gweet *Gweet `protobuf:"bytes,1,opt,name=gweet,proto3" json:"gweet,omitempty"`
-}
-
-func (x *ListGwitterResponse) Reset() {
-	*x = ListGwitterResponse{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_protoc_example_proto_msgTypes[10]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *ListGwitterResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ListGwitterResponse) ProtoMessage() {}
-
-func (x *ListGwitterResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_protoc_example_proto_msgTypes[10]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ListGwitterResponse.ProtoReflect.Descriptor instead.
-func (*ListGwitterResponse) Descriptor() ([]byte, []int) {
-	return file_protoc_example_proto_rawDescGZIP(), []int{10}
-}
-
-func (x *ListGwitterResponse) GetGweet() *Gweet {
-	if x != nil {
-		return x.Gweet
-	}
-	return nil
 }
 
 var File_protoc_example_proto protoreflect.FileDescriptor
@@ -551,71 +121,16 @@ var File_protoc_example_proto protoreflect.FileDescriptor
 var file_protoc_example_proto_rawDesc = []byte{
 	0x0a, 0x14, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x63, 0x2f, 0x65, 0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65,
 	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x07, 0x67, 0x77, 0x69, 0x74, 0x74, 0x65, 0x72, 0x22,
-	0x4a, 0x0a, 0x05, 0x47, 0x77, 0x65, 0x65, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01,
-	0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x12, 0x17, 0x0a, 0x07, 0x75, 0x73, 0x65, 0x72,
-	0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x75, 0x73, 0x65, 0x72, 0x49,
-	0x64, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x18, 0x03, 0x20, 0x01,
-	0x28, 0x09, 0x52, 0x07, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x22, 0x3a, 0x0a, 0x12, 0x50,
-	0x6f, 0x73, 0x74, 0x47, 0x77, 0x69, 0x74, 0x74, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
-	0x74, 0x12, 0x24, 0x0a, 0x05, 0x67, 0x77, 0x65, 0x65, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b,
-	0x32, 0x0e, 0x2e, 0x67, 0x77, 0x69, 0x74, 0x74, 0x65, 0x72, 0x2e, 0x47, 0x77, 0x65, 0x65, 0x74,
-	0x52, 0x05, 0x67, 0x77, 0x65, 0x65, 0x74, 0x22, 0x3b, 0x0a, 0x13, 0x50, 0x6f, 0x73, 0x74, 0x47,
-	0x77, 0x69, 0x74, 0x74, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x24,
-	0x0a, 0x05, 0x67, 0x77, 0x65, 0x65, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0e, 0x2e,
-	0x67, 0x77, 0x69, 0x74, 0x74, 0x65, 0x72, 0x2e, 0x47, 0x77, 0x65, 0x65, 0x74, 0x52, 0x05, 0x67,
-	0x77, 0x65, 0x65, 0x74, 0x22, 0x2f, 0x0a, 0x12, 0x52, 0x65, 0x61, 0x64, 0x47, 0x77, 0x69, 0x74,
-	0x74, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x19, 0x0a, 0x08, 0x67, 0x77,
-	0x65, 0x65, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x67, 0x77,
-	0x65, 0x65, 0x74, 0x49, 0x64, 0x22, 0x3b, 0x0a, 0x13, 0x52, 0x65, 0x61, 0x64, 0x47, 0x77, 0x69,
-	0x74, 0x74, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x24, 0x0a, 0x05,
-	0x67, 0x77, 0x65, 0x65, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0e, 0x2e, 0x67, 0x77,
-	0x69, 0x74, 0x74, 0x65, 0x72, 0x2e, 0x47, 0x77, 0x65, 0x65, 0x74, 0x52, 0x05, 0x67, 0x77, 0x65,
-	0x65, 0x74, 0x22, 0x3c, 0x0a, 0x14, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x47, 0x77, 0x69, 0x74,
-	0x74, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x24, 0x0a, 0x05, 0x67, 0x77,
-	0x65, 0x65, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0e, 0x2e, 0x67, 0x77, 0x69, 0x74,
-	0x74, 0x65, 0x72, 0x2e, 0x47, 0x77, 0x65, 0x65, 0x74, 0x52, 0x05, 0x67, 0x77, 0x65, 0x65, 0x74,
-	0x22, 0x3d, 0x0a, 0x15, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x47, 0x77, 0x69, 0x74, 0x74, 0x65,
-	0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x24, 0x0a, 0x05, 0x67, 0x77, 0x65,
-	0x65, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0e, 0x2e, 0x67, 0x77, 0x69, 0x74, 0x74,
-	0x65, 0x72, 0x2e, 0x47, 0x77, 0x65, 0x65, 0x74, 0x52, 0x05, 0x67, 0x77, 0x65, 0x65, 0x74, 0x22,
-	0x31, 0x0a, 0x14, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x47, 0x77, 0x69, 0x74, 0x74, 0x65, 0x72,
-	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x19, 0x0a, 0x08, 0x67, 0x77, 0x65, 0x65, 0x74,
-	0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x67, 0x77, 0x65, 0x65, 0x74,
-	0x49, 0x64, 0x22, 0x32, 0x0a, 0x15, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x47, 0x77, 0x69, 0x74,
-	0x74, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x19, 0x0a, 0x08, 0x67,
-	0x77, 0x65, 0x65, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x67,
-	0x77, 0x65, 0x65, 0x74, 0x49, 0x64, 0x22, 0x14, 0x0a, 0x12, 0x4c, 0x69, 0x73, 0x74, 0x47, 0x77,
-	0x69, 0x74, 0x74, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x22, 0x3b, 0x0a, 0x13,
-	0x4c, 0x69, 0x73, 0x74, 0x47, 0x77, 0x69, 0x74, 0x74, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f,
-	0x6e, 0x73, 0x65, 0x12, 0x24, 0x0a, 0x05, 0x67, 0x77, 0x65, 0x65, 0x74, 0x18, 0x01, 0x20, 0x01,
-	0x28, 0x0b, 0x32, 0x0e, 0x2e, 0x67, 0x77, 0x69, 0x74, 0x74, 0x65, 0x72, 0x2e, 0x47, 0x77, 0x65,
-	0x65, 0x74, 0x52, 0x05, 0x67, 0x77, 0x65, 0x65, 0x74, 0x32, 0x8e, 0x03, 0x0a, 0x0c, 0x47, 0x77,
-	0x65, 0x65, 0x74, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x48, 0x0a, 0x0b, 0x50, 0x6f,
-	0x73, 0x74, 0x47, 0x77, 0x69, 0x74, 0x74, 0x65, 0x72, 0x12, 0x1b, 0x2e, 0x67, 0x77, 0x69, 0x74,
-	0x74, 0x65, 0x72, 0x2e, 0x50, 0x6f, 0x73, 0x74, 0x47, 0x77, 0x69, 0x74, 0x74, 0x65, 0x72, 0x52,
-	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1c, 0x2e, 0x67, 0x77, 0x69, 0x74, 0x74, 0x65, 0x72,
-	0x2e, 0x50, 0x6f, 0x73, 0x74, 0x47, 0x77, 0x69, 0x74, 0x74, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70,
-	0x6f, 0x6e, 0x73, 0x65, 0x12, 0x48, 0x0a, 0x0b, 0x52, 0x65, 0x61, 0x64, 0x47, 0x77, 0x69, 0x74,
-	0x74, 0x65, 0x72, 0x12, 0x1b, 0x2e, 0x67, 0x77, 0x69, 0x74, 0x74, 0x65, 0x72, 0x2e, 0x52, 0x65,
-	0x61, 0x64, 0x47, 0x77, 0x69, 0x74, 0x74, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
-	0x1a, 0x1c, 0x2e, 0x67, 0x77, 0x69, 0x74, 0x74, 0x65, 0x72, 0x2e, 0x52, 0x65, 0x61, 0x64, 0x47,
-	0x77, 0x69, 0x74, 0x74, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x4e,
-	0x0a, 0x0d, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x47, 0x77, 0x69, 0x74, 0x74, 0x65, 0x72, 0x12,
-	0x1d, 0x2e, 0x67, 0x77, 0x69, 0x74, 0x74, 0x65, 0x72, 0x2e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65,
-	0x47, 0x77, 0x69, 0x74, 0x74, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1e,
-	0x2e, 0x67, 0x77, 0x69, 0x74, 0x74, 0x65, 0x72, 0x2e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x47,
-	0x77, 0x69, 0x74, 0x74, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x4e,
-	0x0a, 0x0d, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x47, 0x77, 0x69, 0x74, 0x74, 0x65, 0x72, 0x12,
-	0x1d, 0x2e, 0x67, 0x77, 0x69, 0x74, 0x74, 0x65, 0x72, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65,
-	0x47, 0x77, 0x69, 0x74, 0x74, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1e,
-	0x2e, 0x67, 0x77, 0x69, 0x74, 0x74, 0x65, 0x72, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x47,
-	0x77, 0x69, 0x74, 0x74, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x4a,
-	0x0a, 0x0b, 0x4c, 0x69, 0x73, 0x74, 0x47, 0x77, 0x69, 0x74, 0x74, 0x65, 0x72, 0x12, 0x1b, 0x2e,
-	0x67, 0x77, 0x69, 0x74, 0x74, 0x65, 0x72, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x47, 0x77, 0x69, 0x74,
-	0x74, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1c, 0x2e, 0x67, 0x77, 0x69,
-	0x74, 0x74, 0x65, 0x72, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x47, 0x77, 0x69, 0x74, 0x74, 0x65, 0x72,
-	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x30, 0x01, 0x42, 0x05, 0x5a, 0x03, 0x70, 0x62,
-	0x2f, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x22, 0x0a, 0x0c, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12,
+	0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e,
+	0x61, 0x6d, 0x65, 0x22, 0x26, 0x0a, 0x0a, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x52, 0x65, 0x70, 0x6c,
+	0x79, 0x12, 0x18, 0x0a, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x32, 0x43, 0x0a, 0x07, 0x47,
+	0x72, 0x65, 0x65, 0x74, 0x65, 0x72, 0x12, 0x38, 0x0a, 0x08, 0x53, 0x61, 0x79, 0x48, 0x65, 0x6c,
+	0x6c, 0x6f, 0x12, 0x15, 0x2e, 0x67, 0x77, 0x69, 0x74, 0x74, 0x65, 0x72, 0x2e, 0x48, 0x65, 0x6c,
+	0x6c, 0x6f, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x13, 0x2e, 0x67, 0x77, 0x69, 0x74,
+	0x74, 0x65, 0x72, 0x2e, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x00,
+	0x42, 0x05, 0x5a, 0x03, 0x70, 0x62, 0x2f, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -630,42 +145,19 @@ func file_protoc_example_proto_rawDescGZIP() []byte {
 	return file_protoc_example_proto_rawDescData
 }
 
-var file_protoc_example_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
+var file_protoc_example_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_protoc_example_proto_goTypes = []interface{}{
-	(*Gweet)(nil),                 // 0: gwitter.Gweet
-	(*PostGwitterRequest)(nil),    // 1: gwitter.PostGwitterRequest
-	(*PostGwitterResponse)(nil),   // 2: gwitter.PostGwitterResponse
-	(*ReadGwitterRequest)(nil),    // 3: gwitter.ReadGwitterRequest
-	(*ReadGwitterResponse)(nil),   // 4: gwitter.ReadGwitterResponse
-	(*UpdateGwitterRequest)(nil),  // 5: gwitter.UpdateGwitterRequest
-	(*UpdateGwitterResponse)(nil), // 6: gwitter.UpdateGwitterResponse
-	(*DeleteGwitterRequest)(nil),  // 7: gwitter.DeleteGwitterRequest
-	(*DeleteGwitterResponse)(nil), // 8: gwitter.DeleteGwitterResponse
-	(*ListGwitterRequest)(nil),    // 9: gwitter.ListGwitterRequest
-	(*ListGwitterResponse)(nil),   // 10: gwitter.ListGwitterResponse
+	(*HelloRequest)(nil), // 0: gwitter.HelloRequest
+	(*HelloReply)(nil),   // 1: gwitter.HelloReply
 }
 var file_protoc_example_proto_depIdxs = []int32{
-	0,  // 0: gwitter.PostGwitterRequest.gweet:type_name -> gwitter.Gweet
-	0,  // 1: gwitter.PostGwitterResponse.gweet:type_name -> gwitter.Gweet
-	0,  // 2: gwitter.ReadGwitterResponse.gweet:type_name -> gwitter.Gweet
-	0,  // 3: gwitter.UpdateGwitterRequest.gweet:type_name -> gwitter.Gweet
-	0,  // 4: gwitter.UpdateGwitterResponse.gweet:type_name -> gwitter.Gweet
-	0,  // 5: gwitter.ListGwitterResponse.gweet:type_name -> gwitter.Gweet
-	1,  // 6: gwitter.GweetService.PostGwitter:input_type -> gwitter.PostGwitterRequest
-	3,  // 7: gwitter.GweetService.ReadGwitter:input_type -> gwitter.ReadGwitterRequest
-	5,  // 8: gwitter.GweetService.UpdateGwitter:input_type -> gwitter.UpdateGwitterRequest
-	7,  // 9: gwitter.GweetService.DeleteGwitter:input_type -> gwitter.DeleteGwitterRequest
-	9,  // 10: gwitter.GweetService.ListGwitter:input_type -> gwitter.ListGwitterRequest
-	2,  // 11: gwitter.GweetService.PostGwitter:output_type -> gwitter.PostGwitterResponse
-	4,  // 12: gwitter.GweetService.ReadGwitter:output_type -> gwitter.ReadGwitterResponse
-	6,  // 13: gwitter.GweetService.UpdateGwitter:output_type -> gwitter.UpdateGwitterResponse
-	8,  // 14: gwitter.GweetService.DeleteGwitter:output_type -> gwitter.DeleteGwitterResponse
-	10, // 15: gwitter.GweetService.ListGwitter:output_type -> gwitter.ListGwitterResponse
-	11, // [11:16] is the sub-list for method output_type
-	6,  // [6:11] is the sub-list for method input_type
-	6,  // [6:6] is the sub-list for extension type_name
-	6,  // [6:6] is the sub-list for extension extendee
-	0,  // [0:6] is the sub-list for field type_name
+	0, // 0: gwitter.Greeter.SayHello:input_type -> gwitter.HelloRequest
+	1, // 1: gwitter.Greeter.SayHello:output_type -> gwitter.HelloReply
+	1, // [1:2] is the sub-list for method output_type
+	0, // [0:1] is the sub-list for method input_type
+	0, // [0:0] is the sub-list for extension type_name
+	0, // [0:0] is the sub-list for extension extendee
+	0, // [0:0] is the sub-list for field type_name
 }
 
 func init() { file_protoc_example_proto_init() }
@@ -675,7 +167,7 @@ func file_protoc_example_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_protoc_example_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Gweet); i {
+			switch v := v.(*HelloRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -687,115 +179,7 @@ func file_protoc_example_proto_init() {
 			}
 		}
 		file_protoc_example_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PostGwitterRequest); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_protoc_example_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PostGwitterResponse); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_protoc_example_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ReadGwitterRequest); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_protoc_example_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ReadGwitterResponse); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_protoc_example_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*UpdateGwitterRequest); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_protoc_example_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*UpdateGwitterResponse); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_protoc_example_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DeleteGwitterRequest); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_protoc_example_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DeleteGwitterResponse); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_protoc_example_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ListGwitterRequest); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_protoc_example_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ListGwitterResponse); i {
+			switch v := v.(*HelloReply); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -813,7 +197,7 @@ func file_protoc_example_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_protoc_example_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   11,
+			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
