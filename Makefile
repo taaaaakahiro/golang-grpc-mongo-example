@@ -4,5 +4,5 @@ down:
 build:
 	docker-compose build
 
-protoc:
-	protoc protoc/example.proto --go_out=plugins=grpc:.
+proto:
+	protoc --go_out=. --go-grpc_out=require_unimplemented_servers=false:. ./protoc/example.proto

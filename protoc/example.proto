@@ -1,63 +1,63 @@
 
-// syntax = "proto3";
+syntax = "proto3";
 
-// package gwitter;
+package gwitter;
 
-// option go_package = "gwitterpb";
+option go_package = "pb/";
 
-// //Gweetの型を決めます。各フィールドは型と名称を持ちます。
-// message Gweet {
-//     string id = 1;
-//     string user_id = 2;
-//     string content = 3;
-// }
+//Gweetの型を決めます。各フィールドは型と名称を持ちます。
+message Gweet {
+    string id = 1;
+    string user_id = 2;
+    string content = 3;
+}
 
-// message PostGwitterRequest{
-//     Gweet gweet = 1;
-// }
+message PostGwitterRequest{
+    Gweet gweet = 1;
+}
 
-// message PostGwitterResponse{
-//     Gweet gweet = 1;
-// }
+message PostGwitterResponse{
+    Gweet gweet = 1;
+}
 
-// message ReadGwitterRequest{
-//     string gweet_id = 1;
-// }
+message ReadGwitterRequest{
+    string gweet_id = 1;
+}
 
-// message ReadGwitterResponse {
-//     Gweet gweet = 1;
-// }
+message ReadGwitterResponse {
+    Gweet gweet = 1;
+}
 
-// message UpdateGwitterRequest{
-//     Gweet gweet = 1;
-// }
+message UpdateGwitterRequest{
+    Gweet gweet = 1;
+}
 
-// message UpdateGwitterResponse {
-//     Gweet gweet = 1;
-// }
+message UpdateGwitterResponse {
+    Gweet gweet = 1;
+}
 
-// message DeleteGwitterRequest {
-//     string gweet_id = 1;
-// }
+message DeleteGwitterRequest {
+    string gweet_id = 1;
+}
 
-// message DeleteGwitterResponse {
-//     string gweet_id = 1;
-// }
+message DeleteGwitterResponse {
+    string gweet_id = 1;
+}
 
-// //全取得の時は特に何も指定しない
-// message ListGwitterRequest {
+//全取得の時は特に何も指定しない
+message ListGwitterRequest {
 
-// }
+}
 
-// message ListGwitterResponse {
-//     Gweet gweet = 1;
-// }
+message ListGwitterResponse {
+    Gweet gweet = 1;
+}
 
 
-// service GweetService{
-//     rpc PostGwitter (PostGwitterRequest) returns (PostGwitterResponse);
-//     rpc ReadGwitter (ReadGwitterRequest) returns (ReadGwitterResponse);
-//     rpc UpdateGwitter (UpdateGwitterRequest) returns (UpdateGwitterResponse);
-//     rpc DeleteGwitter (DeleteGwitterRequest) returns (DeleteGwitterResponse); // return NOT_FOUND if not found
-//     rpc ListGwitter (ListGwitterRequest) returns (stream ListGwitterResponse);
-// }
+service GweetService{
+    rpc PostGwitter (PostGwitterRequest) returns (PostGwitterResponse);
+    rpc ReadGwitter (ReadGwitterRequest) returns (ReadGwitterResponse);
+    rpc UpdateGwitter (UpdateGwitterRequest) returns (UpdateGwitterResponse);
+    rpc DeleteGwitter (DeleteGwitterRequest) returns (DeleteGwitterResponse); // return NOT_FOUND if not found
+    rpc ListGwitter (ListGwitterRequest) returns (stream ListGwitterResponse);
+}
