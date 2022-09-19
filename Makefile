@@ -10,10 +10,10 @@ build:
 restart:
 	docker-compose restart
 
-proto:
+protoc:
 	protoc --go_out=. --go-grpc_out=require_unimplemented_servers=false:. ./protoc/example.proto
 
-serve:
+ser:
 	go run server/server.go
 
 cli:
